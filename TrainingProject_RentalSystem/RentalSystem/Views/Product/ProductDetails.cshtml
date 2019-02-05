@@ -1,0 +1,61 @@
+﻿@model RentalSystem.Models.ProductModel
+@Html.Partial("_navbar")
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>eCommerce Product Detail</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="container-fliud">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <img class="rounded" src=@Url.Content(@Model.Image1) alt="Cinque Terre" width="350" height="300">
+                    </div>
+                    <div class="details col-md-6">
+                        <div class="col-md-2">
+
+                        </div>
+                        <h3 class="product-title text-primary">@Model.ProductName</h3>
+
+                        <p class="product-description text-body">@Model.Description</p>
+                        <h4 class="price"><b>Rent: ₹ <span>@Model.Rent</span></b></h4>
+                        <h5 class="startDate text-success">Available From : @Model.StartDate</h5>
+                        <h5 class="endDate text-success">Available upto : @Model.EndDate </h5>
+                        <p class="vote"><strong>91%</strong> of buyers upvoted this deal! <strong>(87 votes)</strong></p>
+                        @if (Model.Availability == true)
+                        {
+                            <div class="action">
+                                @using (Html.BeginForm("Rent", "Product", FormMethod.Post))
+                                {
+                                    <input type="hidden" value="@Model.ProductId" name="productId" />
+                                    <button class="add-to-cart btn btn-info">Rent this Now</button>
+                                    <span class="fa fa-heart btn btn-danger"></span>
+                                }
+
+                            </div>
+                        }else
+                        {
+                            <p class="text-warning"> <b> This Product is already rented! </b></p>
+                        }
+                        <br />
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

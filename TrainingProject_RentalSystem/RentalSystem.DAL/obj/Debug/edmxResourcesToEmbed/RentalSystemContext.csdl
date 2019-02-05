@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RentalSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Products_CategoryId" FromRole="Category" ToRole="Products" />
+    <NavigationProperty Name="RentProducts" Relationship="RentalSystemModel.FK_RentProducts_Category" FromRole="Category" ToRole="RentProduct" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VendorId" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Image1" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Image2" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Image3" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Availability" Type="Boolean" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CategoryId" Type="Int32" />
+    <Property Name="Rent" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Products_CategoryId" FromRole="Products" ToRole="Category" />
+    <NavigationProperty Name="UserLogin" Relationship="Self.FK_Products_VendorId" FromRole="Products" ToRole="UserLogins" />
+    <NavigationProperty Name="RentProducts" Relationship="RentalSystemModel.FK_RentProducts_Products" FromRole="Product" ToRole="RentProduct" />
+  </EntityType>
+  <EntityType Name="UserLogin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Products_VendorId" FromRole="UserLogins" ToRole="Products" />
+    <NavigationProperty Name="UserRole" Relationship="Self.FK_UserLogins_UserRoles" FromRole="UserLogins" ToRole="UserRoles" />
+    <NavigationProperty Name="User" Relationship="RentalSystemModel.FK_Users_UserLogin" FromRole="UserLogin" ToRole="User" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="UserLogins" Relationship="Self.FK_UserLogins_UserRoles" FromRole="UserRoles" ToRole="UserLogins" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="PaymentId" Type="Int32" />
+    <Property Name="Valid" Type="Boolean" />
+    <Property Name="Photo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserLogin" Relationship="RentalSystemModel.FK_Users_UserLogin" FromRole="User" ToRole="UserLogin" />
+    <NavigationProperty Name="RentProducts" Relationship="RentalSystemModel.FK_RentProducts_Users" FromRole="User" ToRole="RentProduct" />
+  </EntityType>
+  <Association Name="FK_Products_CategoryId">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_VendorId">
+    <End Role="UserLogins" Type="Self.UserLogin" Multiplicity="1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserLogins">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserLogins_UserRoles">
+    <End Role="UserRoles" Type="Self.UserRole" Multiplicity="1" />
+    <End Role="UserLogins" Type="Self.UserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserLogins">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RentalSystemContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="UserLogins" EntityType="Self.UserLogin" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Products_CategoryId" Association="Self.FK_Products_CategoryId">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_VendorId" Association="Self.FK_Products_VendorId">
+      <End Role="UserLogins" EntitySet="UserLogins" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserLogins_UserRoles" Association="Self.FK_UserLogins_UserRoles">
+      <End Role="UserRoles" EntitySet="UserRoles" />
+      <End Role="UserLogins" EntitySet="UserLogins" />
+    </AssociationSet>
+    <FunctionImport Name="spGetAllProducts" ReturnType="Collection(RentalSystemModel.spGetAllProducts_Result)">
+      <Parameter Name="Id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="spGetAllProductsAdmin" ReturnType="Collection(RentalSystemModel.spGetAllProductsAdmin_Result)" />
+    <EntitySet Name="Feedbacks" EntityType="RentalSystemModel.Feedback" />
+    <AssociationSet Name="FK_Users_UserLogin" Association="RentalSystemModel.FK_Users_UserLogin">
+      <End Role="UserLogin" EntitySet="UserLogins" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="RentProducts" EntityType="RentalSystemModel.RentProduct" />
+    <AssociationSet Name="FK_RentProducts_Category" Association="RentalSystemModel.FK_RentProducts_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="RentProduct" EntitySet="RentProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RentProducts_Products" Association="RentalSystemModel.FK_RentProducts_Products">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="RentProduct" EntitySet="RentProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RentProducts_Users" Association="RentalSystemModel.FK_RentProducts_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="RentProduct" EntitySet="RentProducts" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="spGetAllProducts_Result">
+    <Property Type="Int32" Name="ProductId" Nullable="false" />
+    <Property Type="Int32" Name="VendorId" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Image1" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Image2" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Image3" Nullable="true" MaxLength="150" />
+    <Property Type="Boolean" Name="Availability" Nullable="false" />
+    <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="EndDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CategoryId" Nullable="true" />
+    <Property Type="Double" Name="Rent" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="spGetAllProductsAdmin_Result">
+    <Property Type="Int32" Name="ProductId" Nullable="false" />
+    <Property Type="Int32" Name="VendorId" Nullable="false" />
+    <Property Type="String" Name="ProductName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Image1" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Image2" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="Image3" Nullable="true" MaxLength="150" />
+    <Property Type="Boolean" Name="Availability" Nullable="true" />
+    <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="EndDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CategoryId" Nullable="true" />
+    <Property Type="Double" Name="Rent" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="FeedbackId" />
+    </Key>
+    <Property Name="FeedbackTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="FeedbackDescription" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+    <Property Name="FeedbackId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <Association Name="FK_Users_UserLogin">
+    <End Type="RentalSystemModel.UserLogin" Role="UserLogin" Multiplicity="1" />
+    <End Type="RentalSystemModel.User" Role="User" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="UserLogin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="RentProduct">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VendorId" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TotalCost" Type="Double" Nullable="false" />
+    <Property Name="UnitCost" Type="Double" Nullable="false" />
+    <Property Name="Payment" Type="Boolean" Nullable="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="CategoryId" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="RentalSystemModel.FK_RentProducts_Category" FromRole="RentProduct" ToRole="Category" />
+    <NavigationProperty Name="Product" Relationship="RentalSystemModel.FK_RentProducts_Products" FromRole="RentProduct" ToRole="Product" />
+    <NavigationProperty Name="User" Relationship="RentalSystemModel.FK_RentProducts_Users" FromRole="RentProduct" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_RentProducts_Category">
+    <End Type="RentalSystemModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="RentalSystemModel.RentProduct" Role="RentProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RentProduct">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RentProducts_Products">
+    <End Type="RentalSystemModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="RentalSystemModel.RentProduct" Role="RentProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="RentProduct">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RentProducts_Users">
+    <End Type="RentalSystemModel.User" Role="User" Multiplicity="1" />
+    <End Type="RentalSystemModel.RentProduct" Role="RentProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RentProduct">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

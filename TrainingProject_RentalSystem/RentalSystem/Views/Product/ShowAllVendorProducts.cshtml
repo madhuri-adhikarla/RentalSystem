@@ -1,0 +1,162 @@
+﻿@model IEnumerable<RentalSystem.Models.ProductModel>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+@if (Session["UserId"] != null)
+{
+
+    <div class="container">
+
+        <!--Navbar start-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#"> <b> Online Rental System </b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="row">
+                    <div class="col-md-6">  </div>
+
+                    <div class="col-md-">
+
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                @if (Convert.ToBoolean(Session["loginStatus"]) == true && Convert.ToInt32(Session["RoleId"]) == 1)
+                                {
+                                    @Html.ActionLink("Add New Property", "CreateNewProduct", "Product", null, new { @class = "btn btn-default btn-sm" })
+                                }
+                            </li>
+                            <li class="nav-item active">
+                                @Html.ActionLink("Update Your Ads", "GetAllProductsVendor", "Product", null, new { @class = "btn btn-default btn-sm" })
+                            </li>
+
+                            @if (Convert.ToBoolean(Session["loginStatus"]) == true)
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="btn btn-default btn-sm text-primary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @Convert.ToString(Session["UserEmail"]) &nbsp;<span class="glyphicon glyphicon-chevron-down"></span>
+                                    </a>
+
+
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        @Html.ActionLink("Send Feedback", "Create", "Feedback", null, new { @class = "dropdown-item" })
+
+
+                                        <div class="dropdown-divider"></div>
+
+
+                                        @if (Convert.ToBoolean(Session["loginStatus"]) == true)
+                                        {
+                                            @Html.ActionLink("Update Profile", "UpdateProfileForm", "Register", null, new { @class = "dropdown-item" })
+
+                                            @Html.ActionLink("Logout", "Logout", "Register", null, new { @class = "dropdown-item" })
+                                        }
+                                    </div>
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li class="nav-item text-primary">
+                                    @Html.ActionLink("SignUp", "Index", "Home", null, new { @class = "btn btn-default btn-sm " })
+                                </li>
+                                <li class="nav-item text-primary">
+                                    @Html.ActionLink("SignIn", "Index", "Home", null, new { @class = "btn btn-default btn-sm" })
+                                </li>
+                            }
+
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!--Navbar Ends-->
+        <!-- Navbar 2 starts -->
+        <div class="well well-sm">
+
+            <div class="">
+
+                <a href="#" id="list" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-th-list">
+                    </span>List
+                </a>
+
+                <a href="#" id="grid" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-th"></span>Grid
+                </a>
+
+
+
+            </div>
+        </div>
+        <!-- Navbar 2 ends -->
+
+
+
+        @if (Convert.ToString(Session["FeedbackStatus"]) == "success")
+        {
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong> Feedback submitted!
+            </div>
+        }
+
+
+        @if (Model.Count() <= 0)
+        {
+            <h2> No Data Found ! </h2>
+            @Html.ActionLink("Post Your Ad", "CreateNewProduct", "Product", null, new { @class = "btn btn-info" });
+        }
+
+
+
+        @{
+            int i = 0;
+        }
+
+
+        @foreach (var item in Model)
+        {
+            if (i % 4 == 0 || i == 0)
+            {
+
+                <div id="products" class="row"> </div>
+
+            }
+
+
+            <div class="col-md-3">
+                <div class="card" style="width:250px;height:320px">
+                    <div class="card-body">
+
+                        <img class="rounded" src=@Url.Content(item.Image1) alt="Cinque Terre" width="220" height="150   ">
+                        <div class="card-body">
+                            <h4 class="card-title text-primary">@item.ProductName</h4>
+                            <h5 class="text-black-50"><b>Rent : ₹ @item.Rent</b></h5>
+                        </div>
+                        @Html.ActionLink("View Details", "ProductDetails", "Product", new { prodId = item.ProductId }, new { @class = "btn btn-primary", @style = "text-align:center" })
+                    </div>
+                </div>
+                <br />
+            </div>
+            i++;
+        }
+    </div>
+}
+else
+{
+    HttpContext.Current.Session.Add("redirected", "redirecting");
+    Response.Redirect("~/Home/Index");
+
+
+}
+
+
+
+

@@ -1,0 +1,12 @@
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.Models\bin\Debug\RentalSystem.Models.dll
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.Models\bin\Debug\RentalSystem.Models.pdb
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.Models\obj\Debug\RentalSystem.Models.csproj.CoreCompileInputs.cache
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.Models\obj\Debug\RentalSystem.Models.dll
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.Models\obj\Debug\RentalSystem.Models.pdb
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.Models\bin\Debug\RentalSystem.Models.dll.config
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.Models\bin\Debug\EntityFramework.dll
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.Models\bin\Debug\EntityFramework.SqlServer.dll
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.Models\bin\Debug\EntityFramework.xml
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.Models\bin\Debug\EntityFramework.SqlServer.xml
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.Models\obj\Debug\RentalSystem.Models.csproj.CopyComplete
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.Models\obj\Debug\RentalSystem.Models.csprojAssemblyReference.cache

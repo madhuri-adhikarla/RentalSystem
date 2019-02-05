@@ -1,0 +1,12 @@
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.DAL\bin\Debug\RentalSystem.DAL.dll.config
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.DAL\bin\Debug\RentalSystem.DAL.dll
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.DAL\bin\Debug\RentalSystem.DAL.pdb
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.DAL\bin\Debug\EntityFramework.dll
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.DAL\bin\Debug\EntityFramework.xml
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.DAL\obj\Debug\RentalSystem.DAL.csproj.CoreCompileInputs.cache
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.DAL\obj\Debug\RentalSystem.DAL.csproj.CopyComplete
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.DAL\obj\Debug\RentalSystem.DAL.dll
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.DAL\obj\Debug\RentalSystem.DAL.pdb
+D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.DAL\obj\Debug\RentalSystem.DAL.csprojAssemblyReference.cache

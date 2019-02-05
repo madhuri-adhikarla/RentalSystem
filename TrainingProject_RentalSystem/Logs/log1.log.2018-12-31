@@ -1,0 +1,6 @@
+2018-12-31 16:17:55,665 ERROR MonitoringLogger - Exception -- > System.InvalidOperationException: Multiplicity constraint violated. The role 'User' of the relationship 'RentalSystemModel.FK_Users_UserLogin' has multiplicity 1 or 0..1.
+   at RentalSystem.BL.UserDetails.UpdateProfile(UserModel Entity) in D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.BL\UserDetails.cs:line 79
+   at RentalSystem.Controllers.RegisterController.UpdateProfile(UserModel userModel) in D:\VSCODE\TrainingProject_RentalSystem\RentalSystem\Controllers\RegisterController.cs:line 125
+2018-12-31 16:18:07,462 ERROR MonitoringLogger - Exception -- > System.InvalidOperationException: Multiplicity constraint violated. The role 'User' of the relationship 'RentalSystemModel.FK_Users_UserLogin' has multiplicity 1 or 0..1.
+   at RentalSystem.BL.UserDetails.UpdateProfile(UserModel Entity) in D:\VSCODE\TrainingProject_RentalSystem\RentalSystem.BL\UserDetails.cs:line 79
+   at RentalSystem.Controllers.RegisterController.UpdateProfile(UserModel userModel) in D:\VSCODE\TrainingProject_RentalSystem\RentalSystem\Controllers\RegisterController.cs:line 125

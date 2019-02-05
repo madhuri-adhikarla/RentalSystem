@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7ff293c73e1e4c73b3cfa22089104f97" Name="Diagram1">
+        <EntityTypeShape EntityType="RentalSystemModel.Category" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentalSystemModel.Product" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentalSystemModel.UserLogin" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentalSystemModel.UserRole" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentalSystemModel.User" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="RentalSystemModel.FK_Products_CategoryId" ManuallyRouted="false" />
+        <AssociationConnector Association="RentalSystemModel.FK_Products_VendorId" ManuallyRouted="false" />
+        <AssociationConnector Association="RentalSystemModel.FK_UserLogins_UserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RentalSystemModel.Feedback" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="RentalSystemModel.FK_Users_UserLogin" />
+        <EntityTypeShape EntityType="RentalSystemModel.RentProduct" Width="1.5" PointX="8" PointY="3.125" />
+        <AssociationConnector Association="RentalSystemModel.FK_RentProducts_Category" />
+        <AssociationConnector Association="RentalSystemModel.FK_RentProducts_Products" />
+        <AssociationConnector Association="RentalSystemModel.FK_RentProducts_Users" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

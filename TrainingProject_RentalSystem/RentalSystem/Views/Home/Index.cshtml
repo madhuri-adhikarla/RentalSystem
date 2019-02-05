@@ -1,0 +1,265 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <title>SignInSignUpForms</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/common_css.css">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+
+</head>
+<body>
+
+    <div class="row" id="header">
+        <div class="col-md-6">
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col">
+                        <img src="~/Images/default.jpg" width="75" height="75" />
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <b>  <h2 class="text-primary" style="color:blue; align-content: center"> Rental System </h2>  </b>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                   
+                    @Html.ActionLink("HOME", "ShowAllProducts", "Product", null,new {@class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">NEW ACCOUNT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="SignInSignUpForms.html">SIGN IN</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row" id="mainBody">
+        <div class="col-md"></div>
+        <div class="col-md-4">
+            <hr>
+            <h3 id="headlines">NEW ACCOUNT</h3>
+            <h4 id="texts">Not our registered customer yet?</h4>
+            <br>
+            <h5 id="texts">
+                with registration with us new world of fashion, fantastic discounts and much more
+                opens to you! The whole process will not take you more than a minute!
+            </h5>
+            <br>
+            <h5 style="color:#A9A9A9">
+                if you have any question, please feel free to <a href="#" style="color:#20B2AA">contact us</a>,
+                our customer care service center is working for you 24/7.
+            </h5>
+            <hr>
+
+            @using (Html.BeginForm("RegisterCustomer", "Register"))
+            {
+                if (ViewBag.registrationStatus == true)
+                {
+                    <div class="alert alert-success" role="alert">
+                        <strong>Registration succesful!</strong> Please login to continue.
+                    </div>
+                }
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="customer_email">
+                </div>
+
+                <div class="form-group">
+                    <label for="desc">Password:</label>
+                    <input type="password" class="form-control" name="pass" id="pass" required>
+                </div>
+                <div class="form-group">
+                    <label for="desc">Confirm Password:</label>
+                    <input type="password" class="form-control" name="confpass" id="confpass" required>
+                </div>
+
+                <div class="form-group">
+                    <span class="error" style="color:red"></span><br />
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="userType">User Type</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <select name="userType" class="btn btn-light">
+                        <option selected="selected">--Select one--</option>
+                        <option value="1">Vendor</option>
+                        <option value="2">Customer</option>
+                    </select>
+                </div>
+
+                <br />
+
+                <p style="text-align:center"><button class="btn btn-info" type="submit" name="submit"><span class="glyphicon glyphicon-user"></span>&nbsp;Register</button></p>
+
+            }
+            <hr>
+        </div>
+
+        <div class="col-md-1"></div>
+
+        <div class="col-md-4 order-11">
+            <hr>
+            <h3 id="headlines">LOGIN</h3>
+            <h4 id="texts">Already our customer?</h4>
+            <br>
+            <h5 id="texts">Get access to your orders, Wishlist and Recommendations.</h5>
+
+            @if (Convert.ToString(Session["redirected"]) == "redirecting")
+            {
+            <div class="alert alert-warning" role="alert">
+                <strong>Session Expired!</strong> Please login to continue.
+            </div>
+            }
+
+            <hr>
+            @using (Html.BeginForm("LoginUser", "Register", new { name = "registerForm" }))
+            {
+                if (Convert.ToString(Session["loginStatus"])== "loginFailed")
+                {
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                    </div>
+                }
+
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password</label>
+                    <input type="password" class="form-control" id="pwd" name="password">
+                </div>
+                <p style="text-align:center">
+                    <button class="btn btn-info" type="submit" name="btn"><span class="glyphicon glyphicon-log-in"></span>&nbsp;LOG IN</button>
+                </p>
+
+            }
+            <hr>
+
+
+        </div>
+
+        <div class="col order-12"></div>
+    </div>
+    <!-- Footer1 starts -->
+    <!--  <div class="row bg-secondary text-white justify-content-center" style="height:425px">
+          <div class=col-md-3>
+              <br><br><br>
+              <b>About Us</b><br><br>
+              <p> TachAspect empowers small and medium-sized business to reach millions of customers with a number of programmes that help boost their revenue, reach and productivity. By telling stories from a wide range of perspectives, we tell the larger story of who TechAspect is and hoe TechAspect's core bussiness practices contribute to a better India. </p>
+              <hr class="bg-white" style="height:1px">
+              <b>Join Our Monthly Newsletter</b><br>
+              <input type="text" class="form-control">
+          </div>
+
+          <div class="col-md-3" style="font-size:15px">
+              <br><br><br>
+              <b>Blogs</b><br><br>
+              <div class="row">
+                  <div class="col-md-2">
+                      <img src="#">
+                  </div>
+                  <div class="col-md-10 ">
+                      <a href="#" class="text-white"><b>Learn More About How TechAspect is supporting small businesses</b></a>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-2">
+                      <img src="#">
+                  </div>
+                  <div class="col-md-10">
+                      <a href="#" class="text-white"><b>Customer Success</b> </a>
+                  </div>
+              </div>
+          </div>
+
+          <div class=col-md-3>
+              <br><br><br>
+              <b>Contact</b><br><br>
+              <p>TechAspect Solutions Pvt.Ltd. Plot No.38, N Heights, 3rd Floor, Hitech City Phase 2, Madhapur, Hyderabad, Telangana - 500081</p>
+              <b>India</b><br><br>
+              <button class="btn text-white" type="button" style="background-color:#00e6b8; border-radius:0px; border-color:info">
+                  <b>GO TO CONTACT PAGE</b>
+              </button>
+          </div>
+          <br>
+      </div>
+
+      -->
+
+    <script>
+        $("select")
+            .change(function () {
+                var str = "";
+                $("select option:selected").click(function () {
+                    str += $(this).text();
+                });
+                $(".usertype").html(str);
+            })
+            .change();
+    </script>
+
+    <script>
+        var allowsubmit = false;
+        $(function () {
+            //on keypress
+            $('#confpass').hover(function (e) {
+                //get values
+                var pass = $('#pass').val();
+                var confpass = $(this).val();
+
+                //check the strings
+                if (pass == confpass) {
+                    //if both are same remove the error and allow to submit
+                    $('.error').text('');
+                    allowsubmit = true;
+                } else {
+                    //if not matching show error and not allow to submit
+                    $('.error').text('Password not matching');
+                    allowsubmit = false;
+                }
+            });
+
+            //jquery form submit
+            $('#form').submit(function () {
+
+                var pass = $('#pass').val();
+                var confpass = $('#confpass').val();
+
+                //just to make sure once again during submit
+                //if both are true then only allow submit
+                if (pass == confpass) {
+                    allowsubmit = true;
+                }
+                if (allowsubmit) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+</body>

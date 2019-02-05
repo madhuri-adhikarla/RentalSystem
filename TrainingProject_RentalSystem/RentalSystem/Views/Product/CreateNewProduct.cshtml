@@ -1,0 +1,56 @@
+﻿@model RentalSystem.Models.ProductModel
+
+@using (Html.BeginForm("InsertProduct", "Product"))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-horizontal">
+        <h4>Create New Product</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label for="Name">Product Name</label>
+            <input type="text" class="form-control" name="productName" id="productName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Description">Description</label>
+            <textarea class="form-control" name="description"></textarea>
+        </div>
+
+
+        <div class="form-group" name="availability">
+            <input type="checkbox" name="availability" class="inline checkbox" id="checkbox1" value="true">
+            Is The Product Available?
+        </div>
+
+        <div class="form-group">
+            <label for="StartDate">Start Date</label>
+            <input type="date" placeholder="mm/dd/yyyy"  class="form-control" name="startDate" id="startDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="EndDate">End Date</label>
+            <input type="date" placeholder="mm/dd/yyyy" class="form-control" name="endDate" id="endDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="rent">Rent</label>
+            <input type="text" class="form-control" name="rent" id="rent" required>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
