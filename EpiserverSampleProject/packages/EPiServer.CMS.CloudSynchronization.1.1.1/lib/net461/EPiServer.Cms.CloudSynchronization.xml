@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EPiServer.Cms.CloudSynchronization</name>
+    </assembly>
+    <members>
+        <member name="T:EPiServer.ServiceLocation.AccessServiceConfigurationProviderExtensions">
+            <summary>
+            Extension methods for adding services required by the Access rights integration.
+            </summary>
+        </member>
+        <member name="M:EPiServer.ServiceLocation.AccessServiceConfigurationProviderExtensions.AddAccessServices(EPiServer.ServiceLocation.IServiceConfigurationProvider)">
+            <summary>
+            Add services required by the Access rights integration.
+            </summary>
+        </member>
+        <member name="T:EPiServer.ServiceLocation.CategoriesServiceConfigurationProviderExtensions">
+            <summary>
+            Extension methods for adding services required by the Category integration.
+            </summary>
+        </member>
+        <member name="M:EPiServer.ServiceLocation.CategoriesServiceConfigurationProviderExtensions.AddCategoryServices(EPiServer.ServiceLocation.IServiceConfigurationProvider)">
+            <summary>
+            Add services required by the Category integration.
+            </summary>
+        </member>
+        <member name="T:EPiServer.ServiceLocation.ContentTypesServiceConfigurationProviderExtensions">
+            <summary>
+            Extension methods for adding services required by the ContentType integration.
+            </summary>
+        </member>
+        <member name="M:EPiServer.ServiceLocation.ContentTypesServiceConfigurationProviderExtensions.AddContentTypeServices(EPiServer.ServiceLocation.IServiceConfigurationProvider)">
+            <summary>
+            Add services required by the ContentType integration.
+            </summary>
+        </member>
+        <member name="T:EPiServer.ServiceLocation.ContentServiceConfigurationProviderExtensions">
+            <summary>
+            Extension methods for adding services required by the Content integration.
+            </summary>
+        </member>
+        <member name="M:EPiServer.ServiceLocation.ContentServiceConfigurationProviderExtensions.AddContentServices(EPiServer.ServiceLocation.IServiceConfigurationProvider)">
+            <summary>
+            Add services required by the Content integration.
+            </summary>
+        </member>
+        <member name="T:EPiServer.ServiceLocation.SitesServiceConfigurationProviderExtensions">
+            <summary>
+            Extension methods for adding services required by the Site integration.
+            </summary>
+        </member>
+        <member name="M:EPiServer.ServiceLocation.SitesServiceConfigurationProviderExtensions.AddSiteServices(EPiServer.ServiceLocation.IServiceConfigurationProvider)">
+            <summary>
+            Add services required by the Site integration.
+            </summary>
+        </member>
+        <member name="T:EPiServer.Cms.CloudSynchronization.ConfigurationSettings">
+            <summary>
+            Contains setting keys for configuration value added through the &lt;appSettings&gt; element
+            and methods for mapping these to the <see cref="T:EPiServer.Cms.CloudSynchronization.SynchronizationOptions"/> class.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Cms.CloudSynchronization.ConfigurationSettings.MapSettings(EPiServer.Cms.CloudSynchronization.SynchronizationOptions)">
+            <summary>
+            Map configuration settings to an <see cref="T:EPiServer.Cms.CloudSynchronization.SynchronizationOptions"/> instance.
+            </summary>
+            <param name="options">The options instance to set values on.</param>
+        </member>
+        <member name="T:EPiServer.Cms.CloudSynchronization.ContentServiceIntegrationInitialization">
+            <summary>
+            Initialization module for the ContentService Integration module.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Cms.CloudSynchronization.ContentServiceIntegrationInitialization.ConfigureContainer(EPiServer.ServiceLocation.ServiceConfigurationContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:EPiServer.Cms.CloudSynchronization.ContentServiceIntegrationInitialization.Initialize(EPiServer.Framework.Initialization.InitializationEngine)">
+            <inheritdoc />
+        </member>
+        <member name="M:EPiServer.Cms.CloudSynchronization.ContentServiceIntegrationInitialization.Uninitialize(EPiServer.Framework.Initialization.InitializationEngine)">
+            <inheritdoc />
+        </member>
+        <member name="T:EPiServer.Cms.CloudSynchronization.Content.ContentRetriverOptions">
+            <summary>
+            Options for content retriver
+            </summary>
+        </member>
+        <member name="P:EPiServer.Cms.CloudSynchronization.Content.ContentRetriverOptions.MaxSize">
+            <summary>
+            Max number of retrive items
+            </summary>
+        </member>
+        <member name="T:EPiServer.Cms.CloudSynchronization.SynchronizationOptions">
+            <summary>
+            Class containing options on how the CMS synchronization client should connect
+            to the service.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Cms.CloudSynchronization.SynchronizationOptions.ApplicationKey">
+            <summary>
+            The key that is used to identify this specific application.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Cms.CloudSynchronization.SynchronizationOptions.Secret">
+            <summary>
+            The secret that is used to validate the application key.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Cms.CloudSynchronization.SynchronizationOptions.ServiceLocation">
+            <summary>
+            The base URL of the Integration service.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Cms.CloudSynchronization.SynchronizationOptions.ServicePath">
+            <summary>
+            The path to the service end point.
+            </summary>
+            <remarks>
+            This is internal as it is bound to the client implementation details.
+            </remarks>
+        </member>
+        <member name="P:EPiServer.Cms.CloudSynchronization.SynchronizationOptions.Provisioning">
+            <summary>
+            Settings related to the Cloud Provisioning Job.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Cms.CloudSynchronization.SynchronizationOptions.Events">
+            <summary>
+            Settings related to the events based continuos synchronization.
+            </summary>
+        </member>
+        <member name="T:EPiServer.Cms.CloudSynchronization.ProvisioningSettings">
+            <summary>
+            Class containing options on how the Cloud Provisioning Job should function.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Cms.CloudSynchronization.ProvisioningSettings.BatchSize">
+            <summary>
+            The maximum number of items that should be sent per request during provisioning.
+            </summary>
+            <remarks>Default value is 100.</remarks>
+        </member>
+        <member name="P:EPiServer.Cms.CloudSynchronization.ProvisioningSettings.RequestRetries">
+            <summary>
+            The maximum number of attempts that the client should retry if it cannot reach the synchronisation service
+            during provisioning.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Cms.CloudSynchronization.ProvisioningSettings.RequestRetryDelay">
+            <summary>
+            The length to wait until retrying a request to the synchronisation service
+            during provisioning.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Cms.CloudSynchronization.ProvisioningSettings.TrimPadding">
+            <summary>
+            Specifies a time span that should be added to the time stamp sent with the TRIM command
+            at the end of the provisioning. 
+            </summary>
+            <remarks>Default value is 30 seconds.</remarks>
+        </member>
+        <member name="T:EPiServer.Cms.CloudSynchronization.EventSettings">
+            <summary>
+            Class containing options on how the the synchonization client should function
+            when responding to events.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Cms.CloudSynchronization.EventSettings.BatchSize">
+            <summary>
+            The maximum number of commands (content updates etc) that get can be sent in a batch
+            </summary>
+            <remarks>Default value is 100.</remarks>
+        </member>
+        <member name="P:EPiServer.Cms.CloudSynchronization.EventSettings.BatchTimeout">
+            <summary>
+            Specifies the longest time a event command batch should wait before it's sent
+            if the size has not reach the <see cref="P:EPiServer.Cms.CloudSynchronization.EventSettings.BatchSize"/> before that.
+            </summary>
+            <remarks>Default value is 200 ms.</remarks>
+        </member>
+        <member name="P:EPiServer.Cms.CloudSynchronization.EventSettings.RequestRetries">
+            <summary>
+            The number of tries that the client should retry if it cannot reach the synchronization service
+            while responding to an event.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Cms.CloudSynchronization.EventSettings.InitialRequestRetryDelay">
+            <summary>
+            The initial length to wait until retrying a request to the synchronisation service
+            when sending a batch of event commands.
+            </summary>
+        </member>
+    </members>
+</doc>

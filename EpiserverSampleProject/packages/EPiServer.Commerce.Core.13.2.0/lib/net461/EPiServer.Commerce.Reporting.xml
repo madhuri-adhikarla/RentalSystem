@@ -1,0 +1,552 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EPiServer.Commerce.Reporting</name>
+    </assembly>
+    <members>
+        <member name="T:EPiServer.Commerce.Reporting.Initialization.ReportingInitializationModule">
+            <summary>
+            Initialization module to handle the initialization of reporting.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Initialization.ReportingInitializationModule.Initialize(EPiServer.Framework.Initialization.InitializationEngine)">
+            <summary>
+            Initializes reporting module using the specified context.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Initialization.ReportingInitializationModule.Uninitialize(EPiServer.Framework.Initialization.InitializationEngine)">
+            <summary>
+            Uninitializes reporting module.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Initialization.ReportingInitializationModule.ConfigureContainer(EPiServer.ServiceLocation.ServiceConfigurationContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.CommerceReportingFolder">
+             <summary>
+             NOTE: This is a pre-release API that is UNSTABLE and might not satisfy the compatibility 
+             requirements as denoted by its associated normal version.
+            
+             Represents a reporting root folder to structure reporting items
+             </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.CommerceReportingFolder.ReportingRoot">
+            <summary>
+            The reporting root.
+            </summary>
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.IEventDrivenReportingDataUpdater">
+            <summary>
+            NOTE: This is a pre-release API that is UNSTABLE and might not satisfy the compatibility 
+            requirements as denoted by its associated normal version.
+            
+            Generates report entities from purchase order when the order is being updated.
+            </summary>
+            <remarks>
+            It must be used only when the flag "episerver:commerce.EnableEventDrivenOrderReporting" in appSettings is <c>True</c>.
+            </remarks>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.IEventDrivenReportingDataUpdater.GenerateOrderReportingData(EPiServer.Commerce.Order.IPurchaseOrder)">
+            <summary>
+            Generates order reporting data for a <see cref="T:EPiServer.Commerce.Order.IPurchaseOrder"/>.
+            </summary>
+            <param name="purchaseOrder">The purchase order.</param>
+            <returns>An order reporting model.</returns>
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.Internal.DataAccess.ReportingDataLoader">
+            <summary>
+            This type/member supports the EPiServer infrastructure and is not intended to be
+            used directly from your code.
+            
+            Loads reporting data from data warehouse.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.DataAccess.ReportingDataLoader.#ctor(EPiServer.Commerce.Reporting.Order.ReportingAdditionalDataHandler)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EPiServer.Commerce.Reporting.Order.Internal.DataAccess.ReportingDataLoader"/> class.
+            </summary>
+            <param name="reportingAdditionalDataHandler">The reporting additional data handler.</param>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.DataAccess.ReportingDataLoader.GetReportingData(System.DateTime,System.DateTime)">
+            <summary>
+            Gets data for report during a period of time.
+            </summary>
+            <param name="fromDate">The start date to export.</param>
+            <param name="toDate">The end date to export.</param>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.DataAccess.ReportingDataLoader.GetAggregatedReportingData(System.Decimal)">
+            <summary>
+            Gets aggregated data for sales report by day.
+            </summary>
+            <param name="timeZoneOffset">The time zone offset in minutes.</param>
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.Internal.DataAccess.ReportingDataWriter">
+            <summary>
+            This type/member supports the EPiServer infrastructure and is not intended to be
+            used directly from your code.
+            
+            Writes reporting data from data warehouse.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.DataAccess.ReportingDataWriter.#ctor(Mediachase.Data.Provider.IConnectionStringHandler,EPiServer.Commerce.Reporting.Order.IReportingDataGenerator,EPiServer.Commerce.Reporting.Order.IEventDrivenReportingDataUpdater)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EPiServer.Commerce.Reporting.Order.Internal.DataAccess.ReportingDataWriter"/> class.
+            </summary>
+            <param name="connectionStringHandler">The connection string handler.</param>
+            <param name="reportingDataGenerator">The reporting data generator.</param>
+            <param name="eventDrivenReportingDataUpdater">The event driven reporting data updater.</param>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.DataAccess.ReportingDataWriter.SaveOrderReport(System.DateTime,System.DateTime)">
+            <summary>
+            Saves collected data of order to data warehouse.
+            </summary>
+            <param name="fromDate">The start date.</param>
+            <param name="toDate">The end date.</param>
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.Internal.DefaultReportingDataGenerator">
+            <summary>
+            Default implementation of <see cref="T:EPiServer.Commerce.Reporting.Order.IReportingDataGenerator"/> and <see cref="T:EPiServer.Commerce.Reporting.Order.IEventDrivenReportingDataUpdater"/>.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.DefaultReportingDataGenerator.#ctor(EPiServer.Commerce.Order.IOrderSearchService)">
+            <summary>
+            Initializes a new instance of <see ref="DefaultReportDataGenerator" />.
+            </summary>
+            <param name="orderSearchService">The order search service.</param>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.DefaultReportingDataGenerator.GenerateOrderReportingData(System.DateTime,System.DateTime)">
+            <inheritdoc />
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.DefaultReportingDataGenerator.GenerateOrderReportingData(EPiServer.Commerce.Order.IPurchaseOrder)">
+            <inheritdoc />
+            <remarks>This implementation leverages concrete data to speed up the process.</remarks>
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.Internal.DefaultReportingService">
+            <summary>
+            This class is intended to be used internally by EPiServer. We do not support any backward
+            compatibility on this.
+            
+            Default implementation of <see cref="T:EPiServer.Commerce.Reporting.Order.IReportingService"/>.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.DefaultReportingService.#ctor(EPiServer.Framework.Blobs.IBlobFactory,EPiServer.IContentRepository,EPiServer.Web.IUrlSegmentGenerator,EPiServer.Commerce.Reporting.Order.Internal.DataAccess.ReportingDataLoader)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EPiServer.Commerce.Reporting.Order.Internal.DefaultReportingService"/> class.
+            </summary>
+            <param name="blobFactory">The blob factory.</param>
+            <param name="contentRepository">The content repository.</param>
+            <param name="urlSegmentGenerator">The URL segment generator.</param>
+            <param name="reportingDataLoader">The reporting data loader.</param>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.DefaultReportingService.ExportOrderDataAsCsv(System.DateTime,System.DateTime)">
+            <inheritdoc />
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.DefaultReportingService.GetAggregatedReportingData">
+            <inheritdoc />
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.Internal.DirectAccessReportingDataGenerator">
+            <summary>
+            For default implementation of order system, directly access database for best performance.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.DirectAccessReportingDataGenerator.GenerateOrderReportingData(System.DateTime,System.DateTime)">
+            <inheritdoc />
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.Internal.ReportingOrderEventListener">
+            <summary>
+            Listens to order events to update reporting data.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.ReportingOrderEventListener.#ctor(EPiServer.Commerce.Reporting.Order.Internal.DataAccess.ReportingDataWriter,EPiServer.Commerce.Order.IOrderRepository,EPiServer.Commerce.Order.IOrderEvents)">
+            <summary>
+            Initializes a new instance of <see cref="T:EPiServer.Commerce.Reporting.Order.Internal.ReportingOrderEventListener"/>
+            </summary>
+            <param name="reportingDataWriter">The reporting data writer.</param>
+            <param name="orderRepository">The order repository.</param>
+            <param name="orderEvents">The order events.</param>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.ReportingOrderEventListener.System#IDisposable#Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.ReportingOrderEventListener.AddEvents">
+            <summary>
+            Registers the order events.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.Internal.ReportingOrderEventListener.RemoveEvents">
+            <summary>
+            De-registers the order events.
+            </summary>
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.IReportingDataGenerator">
+             <summary>
+             NOTE: This is a pre-release API that is UNSTABLE and might not satisfy the compatibility 
+             requirements as denoted by its associated normal version.
+            
+             Generates report entities from purchase orders.
+             </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.IReportingDataGenerator.GenerateOrderReportingData(System.DateTime,System.DateTime)">
+            <summary>
+            Generates order reporting data.
+            </summary>
+            <param name="fromDate">The start date to generate order reports for.</param>
+            <param name="toDate">The end date to generate order reports for.</param>
+            <returns>A collection of order reporting model.</returns>
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.IReportingService">
+             <summary>
+             NOTE: This is a pre-release API that is UNSTABLE and might not satisfy the compatibility 
+             requirements as denoted by its associated normal version.
+            
+             Service to create report for <see cref="T:EPiServer.Commerce.Order.IPurchaseOrder"/>.
+             </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.IReportingService.ExportOrderDataAsCsv(System.DateTime,System.DateTime)">
+            <summary>
+            Exports the <see cref="T:EPiServer.Commerce.Order.IPurchaseOrder"/> data during a period of time.
+            </summary>
+            <param name="fromDate">The start date to export.</param>
+            <param name="toDate">The end date to export.</param>
+            <returns>The ContentReference of the exported file.</returns>
+            <remarks>The exported file is a zip file that contains a csv file of orders data
+            and and it will be saved in blobs under CommerceReportings asset.
+            The file path to the exported file can be get with Url Resolver and the returned ContentReference</remarks>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.IReportingService.GetAggregatedReportingData">
+            <summary>
+            Gets aggregated data for sales by day report.
+            </summary>
+            <returns>The collection of <see cref="T:EPiServer.Commerce.Reporting.Order.ReportingModels.SalesByDayReportingModel"/>.</returns>
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.ReportingAdditionalDataHandler">
+            <summary>
+            NOTE: This is a pre-release API that is UNSTABLE and might not satisfy the compatibility 
+            requirements as denoted by its associated normal version.
+            
+            Service to handle additional data for reporting.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.ReportingAdditionalDataHandler.GetAdditionalData(System.Int32,System.Int32)">
+            <summary>
+            Get the custom data for reports.
+            </summary>
+            <param name="lineItemId">The line item Id.</param>
+            <param name="orderGroupId">The order group Id.</param>
+            <returns>The collection of additional properties</returns>
+            <remarks>Override this method to fill value for custom properties</remarks>
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.ReportingMediaData">
+            <summary>
+             NOTE: This is a pre-release API that is UNSTABLE and might not satisfy the compatibility 
+             requirements as denoted by its associated normal version.
+             
+             The media data for reports.
+            </summary>
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.ReportingModels.LineItemReportingModel">
+             <summary>
+             NOTE: This is a pre-release API that is UNSTABLE and might not satisfy the compatibility 
+             requirements as denoted by its associated normal version.
+            
+             The line item model for reports.
+             </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.LineItemReportingModel.OrderNumber">
+            <summary>
+            The order number.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.LineItemReportingModel.CustomerId">
+            <summary>
+            The customer id.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.LineItemReportingModel.CustomerName">
+            <summary>
+            The customer name.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.LineItemReportingModel.MarketId">
+            <summary>
+            The order market id.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.LineItemReportingModel.Currency">
+            <summary>
+            The currency.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.LineItemReportingModel.AdditionalValues">
+            <summary>
+            Gets or sets the additional properties.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.Order.ReportingModels.LineItemReportingModel.ToString">
+            <summary>
+            Convert this model to string that can be used in a csv file.
+            </summary>
+            <returns>A string with comma-separated values.</returns>
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.ReportingModels.SalesByDayReportingModel">
+            <summary>
+             NOTE: This is a pre-release API that is UNSTABLE and might not satisfy the compatibility 
+             requirements as denoted by its associated normal version.
+             
+             The sales by day model for reports.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.SalesByDayReportingModel.OrderCreated">
+            <summary>
+            The order created date.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.SalesByDayReportingModel.Market">
+            <summary>
+            The market.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.SalesByDayReportingModel.Currency">
+            <summary>
+            The currency.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.SalesByDayReportingModel.NumberOfOrder">
+            <summary>
+            The number of order.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.SalesByDayReportingModel.ItemsOrdered">
+            <summary>
+            The number of items ordered.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.SalesByDayReportingModel.SubTotal">
+            <summary>
+            The sub total.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.SalesByDayReportingModel.Tax">
+            <summary>
+            The tax.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.SalesByDayReportingModel.Shipping">
+            <summary>
+            The shipping.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.SalesByDayReportingModel.Discounts">
+            <summary>
+            The discounts.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.ReportingModels.SalesByDayReportingModel.Total">
+            <summary>
+            The total.
+            </summary>
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.StoreModels.LineItemStoreModel">
+             <summary>
+             NOTE: This is a pre-release API that is UNSTABLE and might not satisfy the compatibility 
+             requirements as denoted by its associated normal version.
+            
+             Data object for storing line item data.
+             </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.LineItemStoreModel.LineItemId">
+            <summary>
+            The line item id.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.LineItemStoreModel.LineItemCode">
+            <summary>
+            The entry code.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.LineItemStoreModel.DisplayName">
+            <summary>
+            The entry display name.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.LineItemStoreModel.PlacedPrice">
+            <summary>
+            The placed price.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.LineItemStoreModel.Quantity">
+            <summary>
+            The quantity.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.LineItemStoreModel.ExtendedPrice">
+            <summary>
+            The extended price.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.LineItemStoreModel.EntryDiscountAmount">
+            <summary>
+            The entry discount amount.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.LineItemStoreModel.OrderDiscountAmount">
+            <summary>
+            The order discount amount.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.LineItemStoreModel.SalesTax">
+            <summary>
+            The sales tax.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.LineItemStoreModel.OrderGroupId">
+            <summary>
+            The order group id.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.LineItemStoreModel.OrderCreated">
+            <summary>
+            The order created time.
+            </summary>
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel">
+             <summary>
+             NOTE: This is a pre-release API that is UNSTABLE and might not satisfy the compatibility 
+             requirements as denoted by its associated normal version.
+            
+             Data object for storing order data.
+             </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.OrderGroupId">
+            <summary>
+            Gets or sets the order group id.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.OrderNumber">
+            <summary>
+            Gets or sets the order number.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.Currency">
+            <summary>
+            Gets or sets the order currency.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.CustomerId">
+            <summary>
+            Gets or sets the customer id.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.Status">
+            <summary>
+            Gets or sets the order status.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.MarketId">
+            <summary>
+            Gets or sets market id of the order.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.CustomerName">
+            <summary>
+            Gets or sets the customer name.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.OrderCreated">
+            <summary>
+            Gets or sets the created date.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.TotalQuantity">
+            <summary>
+            Gets or sets sum of quantities of all items in the order.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.TaxTotal">
+            <summary>
+            Gets or sets the tax total value.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.ShippingTotal">
+            <summary>
+            Gets or sets the shipping total value.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.HandlingTotal">
+            <summary>
+            Gets or sets the handling total value.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.TotalDiscountAmount">
+            <summary>
+            Gets or sets total of all discounts in the order.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.SubTotal">
+            <summary>
+            Gets or sets order sub total.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.Total">
+            <summary>
+            Gets or sets order total.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.Order.StoreModels.OrderStoreModel.LineItems">
+            <summary>
+            Gets or sets the collection of line items.
+            </summary>
+            <value>
+            The line items.
+            </value>
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.ScheduledJobs.Internal.CollectReportingDataJob">
+            <summary>
+            This class is intended to be used internally by EPiServer. We do not support any backward compatibility on this.
+            Scheduled job that generates the reporting data in CSV format.
+            </summary>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.ScheduledJobs.Internal.CollectReportingDataJob.#ctor(EPiServer.Framework.Localization.LocalizationService,EPiServer.Commerce.Reporting.Order.IReportingService,EPiServer.Commerce.Reporting.ScheduledJobs.Internal.ReportingTimeRangeOptions,EPiServer.Commerce.Reporting.Order.Internal.DataAccess.ReportingDataWriter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EPiServer.Commerce.Reporting.ScheduledJobs.Internal.CollectReportingDataJob"/> class.
+            </summary>
+            <param name="localizationService">The service that is used to handle localization.</param>
+            <param name="reportingService">The service that is used to handle reporting process.</param>
+            <param name="options">The options for this scheduled job.</param>
+            <param name="reportingDataWriter">The reporting data writer.</param>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.ScheduledJobs.Internal.CollectReportingDataJob.Execute">
+            <inheritdoc/>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.ScheduledJobs.Internal.CollectReportingDataJob.SaveOrderData(System.DateTime,System.DateTime)">
+            <summary>
+            Saves collected data of order to data warehouse.
+            </summary>
+            <param name="fromDate">The start date.</param>
+            <param name="toDate">The end date.</param>
+        </member>
+        <member name="T:EPiServer.Commerce.Reporting.ScheduledJobs.Internal.ReportingTimeRangeOptions">
+            <summary>
+            Contains options for the <see cref="T:EPiServer.Commerce.Reporting.ScheduledJobs.Internal.CollectReportingDataJob"/> scheduled job.
+            </summary>
+        </member>
+        <member name="P:EPiServer.Commerce.Reporting.ScheduledJobs.Internal.ReportingTimeRangeOptions.TimeRangesInDays">
+            <summary>
+            Date ranges used to generate reports,
+            defined by the episerver:commerce.ReportingTimeRanges AppSetting.
+            For example 30, 90, 180 days.
+            </summary>
+            <remarks>The default value is 90 if there are no settings for episerver:commerce.ReportingTimeRanges in web.config.</remarks>
+        </member>
+        <member name="M:EPiServer.Commerce.Reporting.ScheduledJobs.Internal.ReportingTimeRangeOptionsTransform.Transform(EPiServer.Commerce.Reporting.ScheduledJobs.Internal.ReportingTimeRangeOptions)">
+            <summary>
+            Transforms reporting time range.
+            </summary>
+            <param name="options">The reporting time range options.</param>
+        </member>
+    </members>
+</doc>
